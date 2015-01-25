@@ -1,0 +1,25 @@
+{
+  "name": "just-canvas",
+  "version": "1.0.0",
+  "description": "Dancing with Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raphamorim/just-canvas.git"
+  },
+  "author": "Raphael Amorim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raphamorim/just-canvas/issues"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "homepage": "https://github.com/raphamorim/just-canvas",
+  "dependencies": {
+    "express": "~4.0.0"
+  }
+}
