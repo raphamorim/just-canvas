@@ -16,11 +16,11 @@ window.onload = function() {
 	});
 };
 
-
-
 function Run(canvas, context, message) {
 	var smoother = new Smoother([0.9995, 0.9995], [0, 0], 0),
 		video = document.createElement('video'),
+		scene = document.querySelector('#scene'),
+		body = document.querySelector('body'),
 		detector;
 
 	var fist_pos_old, angle = [0, 0];
@@ -31,7 +31,12 @@ function Run(canvas, context, message) {
 		}, function(stream) {
 			try {
 				fadeOut(message, function() {
+					scene.style.visibility = 'visible';
+					scene.width = window.innerWidth;
+					scene.height = window.innerHeight;
+					body.style.background = '#000';
 					video.src = compatibility.URL.createObjectURL(stream);
+					scene.play();
 				});
 			} catch (error) {
 				fadeOut(message, function() {
@@ -109,7 +114,9 @@ function Run(canvas, context, message) {
 	}
 }
 
-
+/*
+ * Utils Functions
+*/
 
 function fadeOut(el, callback) {
 	el.style.opacity = 1;

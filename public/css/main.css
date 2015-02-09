@@ -81,11 +81,13 @@ body {
 }
 
 #scene {
-  position: relative;
+  position: absolute;
   border:none;
-  margin:0;
+  margin: 0;
   z-index:1;
-  background: #fff;
+  visibility: hidden;
+  top: 0px;
+  left: 0px;
 }
 
 
