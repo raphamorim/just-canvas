@@ -16,11 +16,16 @@ window.onload = function() {
 	});
 };
 
+
+// steps.style.display = 'block';
+// 					fadeIn(steps);
+
 function Run(canvas, context, message) {
 	var smoother = new Smoother([0.9995, 0.9995], [0, 0], 0),
 		video = document.createElement('video'),
 		scene = document.querySelector('#scene'),
 		body = document.querySelector('body'),
+		steps = document.querySelector('#steps'),
 		detector;
 
 	var fist_pos_old, angle = [0, 0];
@@ -148,6 +153,8 @@ function fadeIn(el, callback) {
 		if (+el.style.opacity < 1) {
 			(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
 		} else {
+			if (typeof callback === 'undefined') return true;
+
 			callback();
 		}
 	};
