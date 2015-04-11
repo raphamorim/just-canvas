@@ -4,12 +4,21 @@ window.onload = function() {
 		btn = document.querySelector('.btn'),
 		guide = document.querySelector('#guide'),
 		message = document.querySelector('#message'),
+		score = document.querySelector('#score'),
+		scoreValue = document.querySelector('#score .value'),
 		video;
+
+
+	score.style.display = 'none';
+	scoreValue.innerHTML = '0';
 
 	btn.addEventListener('click', function() {
 		fadeOut(guide, function() {
-			message.style.display = 'block';
 			fadeIn(message, function() {
+				score.style.display = 'block';
+				message.style.display = 'block';
+				var step = document.querySelector('.step');
+					step.style.display = 'block';
 				Run(canvas, context, message);
 			});
 		});
@@ -17,8 +26,8 @@ window.onload = function() {
 };
 
 
-// steps.style.display = 'block';
-// 					fadeIn(steps);
+steps.style.display = 'block';
+					fadeIn(steps);
 
 function Run(canvas, context, message) {
 	var smoother = new Smoother([0.9995, 0.9995], [0, 0], 0),

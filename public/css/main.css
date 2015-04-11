@@ -19,7 +19,7 @@ body {
 #guide h1 {
   font-weight: 300;
   font-size: 40px;
-  padding: 0;
+  padding: 10px;
   margin: 20px 0px;
   background: #F7F7F7;
 }
@@ -95,7 +95,7 @@ body {
   z-index: 3;
   display: none;
   bottom: 10px;
-  right: 420px;
+  right: 0px;
 }
 
 /* STEPS */
@@ -103,12 +103,13 @@ body {
   float: left;
   margin-right: 10px;
   opacity: .5;
+  display: none;
 }
 
 .step {
   width: 400px;
   height: 300px;
-  background: #FFCD72;
+  /*background: #FFCD72;*/
 }
 
 .pos {
@@ -119,5 +120,16 @@ body {
 }
 
 .pos.active{
-  background: #000;
+  background: #FFCD72;
+}
+
+/* Points */
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 23px;
+  font-weight: bold;
+  z-index: 999;
+  color: #FFF;
 }
