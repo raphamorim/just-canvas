@@ -103,7 +103,6 @@ body {
   float: left;
   margin-right: 10px;
   opacity: .5;
-  display: none;
 }
 
 .step {
@@ -132,4 +131,5 @@ body {
   font-weight: bold;
   z-index: 999;
   color: #FFF;
+  display: none;
 }

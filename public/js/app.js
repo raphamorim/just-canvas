@@ -1,40 +1,60 @@
-window.onload = function() {
-	var canvas = document.getElementById('canvas'),
-		context = canvas.getContext('2d'),
-		btn = document.querySelector('.btn'),
-		guide = document.querySelector('#guide'),
-		message = document.querySelector('#message'),
-		score = document.querySelector('#score'),
-		scoreValue = document.querySelector('#score .value'),
-		video;
+var stepActual = 0;
 
+var Game = {
+	init: function() {
+		var canvas = document.getElementById('canvas'),
+			context = canvas.getContext('2d'),
+			btn = document.querySelector('.btn'),
+			guide = document.querySelector('#guide'),
+			message = document.querySelector('#message'),
+			video;
 
-	score.style.display = 'none';
-	scoreValue.innerHTML = '0';
-
-	btn.addEventListener('click', function() {
-		fadeOut(guide, function() {
-			fadeIn(message, function() {
-				score.style.display = 'block';
-				message.style.display = 'block';
-				var step = document.querySelector('.step');
-					step.style.display = 'block';
-				Run(canvas, context, message);
+		btn.addEventListener('click', function() {
+			Utils.fadeOut(guide, function() {
+				Utils.fadeIn(message, function() {
+					message.style.display = 'block';
+					
+					var step = document.querySelector('.step');
+						step.style.display = 'block';
+					
+					Run(canvas, context, message);
+				});
 			});
 		});
-	});
+	},
+
+	stepsBuild: function(step) {
+		if (!step) step = stepActual;
+
+		var allSteps = document.querySelectorAll('.step>.pos');
+		var nextStep = Math.floor((Math.random() * 4));
+
+		if (nextStep === step) 
+			return Game.stepsBuild(step);
+
+		stepActual = nextStep;
+	},
+
+	scoreBuild: function(points) {
+		var score = document.querySelector('#score'),
+			scoreValue = document.querySelector('#score .value');
+
+		score.style.display = 'block';
+		scoreValue.innerHTML = points;
+	},
+
+	start: function(){
+		Game.scoreBuild(0);
+		document.querySelector('#steps').style.display = 'block';
+		setInterval(Game.stepsBuild, 6000);
+	}
 };
-
-
-steps.style.display = 'block';
-					fadeIn(steps);
 
 function Run(canvas, context, message) {
 	var smoother = new Smoother([0.9995, 0.9995], [0, 0], 0),
 		video = document.createElement('video'),
 		scene = document.querySelector('#scene'),
 		body = document.querySelector('body'),
-		steps = document.querySelector('#steps'),
 		detector;
 
 	var fist_pos_old, angle = [0, 0];
@@ -44,16 +64,18 @@ function Run(canvas, context, message) {
 			video: true
 		}, function(stream) {
 			try {
-				fadeOut(message, function() {
+				Utils.fadeOut(message, function() {
 					scene.style.visibility = 'visible';
 					scene.width = window.innerWidth;
 					scene.height = window.innerHeight;
 					body.style.background = '#000';
 					video.src = compatibility.URL.createObjectURL(stream);
 					scene.play();
+
+					Game.start();
 				});
 			} catch (error) {
-				fadeOut(message, function() {
+				Utils.fadeOut(message, function() {
 					video.src = stream;
 				});
 			}
@@ -70,29 +92,21 @@ function Run(canvas, context, message) {
 		compatibility.requestAnimationFrame(play);
 		if (video.paused) video.play();
 
-		// Draw video overlay:
 		canvas.width = ~~(300 * video.videoWidth / video.videoHeight);
 		canvas.height = 300;
 		context.drawImage(video, 0, 0, canvas.clientWidth, canvas.clientHeight);
 
 		if (video.readyState === video.HAVE_ENOUGH_DATA && video.videoWidth > 0) {
-
-			// Prepare the detector once the video dimensions are known:
 			if (!detector) {
 				var width = ~~(140 * video.videoWidth / video.videoHeight);
 				var height = 140;
 				detector = new objectdetect.detector(width, height, 1.1, objectdetect.handfist);
 			}
 
-			// Do something
-
-			// Perform the actual detection:
 			var coords = detector.detect(video, 1);
-
 			if (coords[0]) {
 				var coord = coords[0];
 
-				// Rescale coordinates from detector to video coordinate space:
 				coord[0] *= video.videoWidth / detector.canvas.width;
 				coord[1] *= video.videoHeight / detector.canvas.height;
 				coord[2] *= video.videoWidth / detector.canvas.width;
@@ -113,7 +127,6 @@ function Run(canvas, context, message) {
 					fist_pos_old = fist_pos;
 				}
 
-				// Draw coordinates on video overlay:
 				context.beginPath();
 				context.lineWidth = '2';
 				context.fillStyle = fist_pos_old ? 'rgba(0, 255, 255, 0.3)' : 'rgba(255, 0, 0, 0.3)';
@@ -128,45 +141,4 @@ function Run(canvas, context, message) {
 	}
 }
 
-/*
- * Utils Functions
-*/
-
-function fadeOut(el, callback) {
-	el.style.opacity = 1;
-
-	var last = +new Date();
-	var tick = function() {
-		el.style.opacity = +el.style.opacity - (new Date() - last) / 600;
-		last = +new Date();
-
-		if (+el.style.opacity > 0) {
-			(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
-		} else {
-			el.style.display = 'none';
-			callback();
-		}
-	};
-
-	tick();
-}
-
-function fadeIn(el, callback) {
-	el.style.opacity = 0;
-
-	var last = +new Date();
-	var tick = function() {
-		el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
-		last = +new Date();
-
-		if (+el.style.opacity < 1) {
-			(window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16)
-		} else {
-			if (typeof callback === 'undefined') return true;
-
-			callback();
-		}
-	};
-
-	tick();
-}
+window.onload = Game.init;
