@@ -32,7 +32,9 @@ var Game = {
 		if (nextStep === step) 
 			return Game.stepsBuild(step);
 
+		allSteps[stepActual].classList.remove('active');
 		stepActual = nextStep;
+		allSteps[stepActual].classList.add('active');
 	},
 
 	scoreBuild: function(points) {
@@ -46,7 +48,7 @@ var Game = {
 	start: function(){
 		Game.scoreBuild(0);
 		document.querySelector('#steps').style.display = 'block';
-		setInterval(Game.stepsBuild, 6000);
+		setInterval(Game.stepsBuild, 2600);
 	}
 };
 
