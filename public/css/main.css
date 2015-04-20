@@ -120,6 +120,7 @@ body {
 
 .pos.active{
   background: #FFCD72;
+  transition: all 700ms ease;
 }
 
 /* Points */

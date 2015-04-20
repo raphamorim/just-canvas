@@ -82,7 +82,7 @@ function Run(canvas, context, message) {
 				});
 			}
 		}, function(error) {
-			alert("WebRTC not available");
+			message.innerHTML = '<h2>Camera not <strong>available</strong>!</h2>';
 		});
 	} catch (error) {
 		alert(error);
