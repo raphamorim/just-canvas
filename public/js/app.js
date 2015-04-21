@@ -119,6 +119,9 @@ function Run(canvas, context, message) {
 
 		canvas.width = ~~(300 * video.videoWidth / video.videoHeight);
 		canvas.height = 300;
+
+      	context.translate(canvas.clientWidth, 0);
+      	context.scale(-1, 1);
 		context.drawImage(video, 0, 0, canvas.clientWidth, canvas.clientHeight);
 
 		if (video.readyState === video.HAVE_ENOUGH_DATA && video.videoWidth > 0) {
