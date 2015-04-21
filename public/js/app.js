@@ -1,4 +1,6 @@
-var stepActual = 0;
+var stepActual = 0,
+	posActual = 0,
+	gamePoints = 0;
 
 var Game = {
 	init: function() {
@@ -32,6 +34,14 @@ var Game = {
 		if (nextStep === step) 
 			return Game.stepsBuild(step);
 
+		if (posActual === stepActual) {
+			gamePoints += 100;
+		} else {
+			gamePoints -= 100;
+		}
+
+		Game.scoreBuild(gamePoints);
+
 		allSteps[stepActual].classList.remove('active');
 		stepActual = nextStep;
 		allSteps[stepActual].classList.add('active');
@@ -45,8 +55,20 @@ var Game = {
 		scoreValue.innerHTML = points;
 	},
 
-	start: function(){
-		Game.scoreBuild(0);
+	score: function(x, y) {
+		if (x <= 200 && y <= 150) {
+			posActual = 0;
+		} else if (x <= 400 && y <= 150) {
+			posActual = 1;
+		} else if (x <= 200 && y >= 151) {
+			posActual = 2;
+		} else if (x <= 400 && y >= 151) {
+			posActual = 3;
+		}
+	},
+
+	start: function() {
+		Game.scoreBuild(gamePoints);
 		document.querySelector('#steps').style.display = 'block';
 		setInterval(Game.stepsBuild, 2600);
 	}
@@ -86,6 +108,7 @@ function Run(canvas, context, message) {
 		});
 	} catch (error) {
 		alert(error);
+		message.innerHTML = '<h2>Ocurred a error!</h2>';
 	}
 
 	compatibility.requestAnimationFrame(play);
@@ -138,6 +161,9 @@ function Run(canvas, context, message) {
 					coord[2] / video.videoWidth * canvas.clientWidth,
 					coord[3] / video.videoHeight * canvas.clientHeight);
 				context.stroke();
+
+				Game.score(coord[0] / video.videoWidth * canvas.clientWidth, coord[1] / video.videoHeight * canvas.clientHeight);
+
 			} else fist_pos_old = null;
 		}
 	}
