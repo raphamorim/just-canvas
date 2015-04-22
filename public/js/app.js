@@ -28,14 +28,14 @@ var Game = {
 	stepsBuild: function(step) {
 		if (!step) step = stepActual;
 
-		var allSteps = document.querySelectorAll('.step>.pos');
-		var nextStep = Math.floor((Math.random() * 4));
+		var allSteps = document.querySelectorAll('.step>.pos'),
+			nextStep = Math.floor((Math.random() * 4));
 
 		if (nextStep === step) 
 			return Game.stepsBuild(step);
 
 		if (posActual === stepActual) {
-			gamePoints += 100;
+			gamePoints += 100;			
 		} else {
 			gamePoints -= 100;
 		}
@@ -52,6 +52,13 @@ var Game = {
 			scoreValue = document.querySelector('#score .value');
 
 		score.style.display = 'block';
+
+		if (points >= 0) {
+			scoreValue.style.color = 'lightgreen';
+		} else {
+			scoreValue.style.color = 'red';
+		}
+
 		scoreValue.innerHTML = points;
 	},
 
@@ -65,6 +72,11 @@ var Game = {
 		} else if (x <= 400 && y >= 151) {
 			posActual = 2;
 		}
+	},
+
+	calibrateCanvas: function(){
+		// Here a simple guide how to use cam
+		setTimeout(Game.start, 10000);
 	},
 
 	start: function() {
@@ -96,7 +108,7 @@ function Run(canvas, context, message) {
 					video.src = compatibility.URL.createObjectURL(stream);
 					scene.play();
 
-					Game.start();
+					Game.calibrateCanvas();
 				});
 			} catch (error) {
 				Utils.fadeOut(message, function() {

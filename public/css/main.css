@@ -116,11 +116,11 @@ body {
   float: left;
   width: 50%;
   height: 50%;
+  transition: all 700ms ease;
 }
 
-.pos.active{
+.pos.active {
   background: #FFCD72;
-  transition: all 700ms ease;
 }
 
 /* Points */
@@ -132,5 +132,6 @@ body {
   font-weight: bold;
   z-index: 999;
   color: #FFF;
+  text-shadow: 0 0 14px #000;
   display: none;
 }
