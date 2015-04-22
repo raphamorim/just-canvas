@@ -57,13 +57,13 @@ var Game = {
 
 	score: function(x, y) {
 		if (x <= 200 && y <= 150) {
-			posActual = 0;
-		} else if (x <= 400 && y <= 150) {
 			posActual = 1;
+		} else if (x <= 400 && y <= 150) {
+			posActual = 0;
 		} else if (x <= 200 && y >= 151) {
-			posActual = 2;
-		} else if (x <= 400 && y >= 151) {
 			posActual = 3;
+		} else if (x <= 400 && y >= 151) {
+			posActual = 2;
 		}
 	},
 
