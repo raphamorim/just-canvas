@@ -12,5 +12,10 @@
   "bugs": {
     "url": "https://github.com/raphamorim/just-canvas/issues"
   },
-  "homepage": "https://github.com/raphamorim/just-canvas"
+  "homepage": "https://github.com/raphamorim/just-canvas",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.12.2",
+    "grunt-contrib-uglify": "^0.8.0"
+  }
 }

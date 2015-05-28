@@ -1,0 +1,137 @@
+body {
+  background-color: #5A6778;
+  color: #5d5d5d;
+  font: 300 15px "Open Sans", helvetica, sans-serif;
+}
+
+#guide {
+  position: relative;
+  width: 820px;
+  margin: 0px auto;
+  margin-top: 50px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  padding: 20px;
+  border-top: 10px solid #FFCD72;
+  text-align: center;
+}
+
+#guide h1 {
+  font-weight: 300;
+  font-size: 40px;
+  padding: 10px;
+  margin: 20px 0px;
+  background: #F7F7F7;
+}
+
+#guide p {
+  font-size: 15px;
+  padding: 0px 80px;
+}
+
+#guide p>a {
+  text-decoration: none;
+  color: #F2766A;
+  font-weight: 600;
+  background: #F7F7F7;
+  padding: 0.5px 5px;
+}
+
+#guide img {
+  width: 320px;
+  height: 285px;
+  padding: 10px;
+}
+
+#guide .btn {
+  background: #F2766A;
+  color: #FFF;
+  cursor: pointer;
+  padding: 10px 90px;
+  font-size: 30px;
+}
+
+#guide .btn:hover {
+  opacity: 0.8;
+}
+
+#message {
+  margin: 0 auto;
+  width: 840px;
+  text-align: center;
+  background: #F2766A;
+  padding: 15px 40px;
+  font-size: 50px;
+  margin-top: 120px;
+  display: none;
+  color: #FFF;
+}
+
+#message strong {
+  color: #FFCD72;
+  text-decoration: underline;
+}
+
+#canvas {
+  position: fixed;
+  z-index: 2;
+  bottom: 10px;
+  right: 10px;
+  opacity: 1;
+}
+
+#scene {
+  position: absolute;
+  border:none;
+  margin: 0;
+  z-index:1;
+  visibility: hidden;
+  top: 0px;
+  left: 0px;
+}
+
+#steps {
+  position: fixed;
+  z-index: 3;
+  display: none;
+  bottom: 10px;
+  right: 0px;
+}
+
+/* STEPS */
+.steps .step {
+  float: left;
+  margin-right: 10px;
+  opacity: .5;
+}
+
+.step {
+  width: 400px;
+  height: 300px;
+  /*background: #FFCD72;*/
+}
+
+.pos {
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 50%;
+  transition: all 700ms ease;
+}
+
+.pos.active {
+  background: #FFCD72;
+}
+
+/* Points */
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 23px;
+  font-weight: bold;
+  z-index: 999;
+  color: #FFF;
+  text-shadow: 0 0 14px #000;
+  display: none;
+}
