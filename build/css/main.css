@@ -8,7 +8,7 @@ body {
   position: relative;
   width: 820px;
   margin: 0px auto;
-  margin-top: 50px;
+  margin-top: 20px;
   background: #FFFFFF;
   border-radius: 5px;
   padding: 20px;
@@ -38,8 +38,6 @@ body {
 }
 
 #guide img {
-  width: 320px;
-  height: 285px;
   padding: 10px;
 }
 
