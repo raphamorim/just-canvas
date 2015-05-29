@@ -8,12 +8,13 @@ var Game = {
 			context = canvas.getContext('2d'),
 			btn = document.querySelector('.btn'),
 			guide = document.querySelector('#guide'),
-			message = document.querySelector('#message'),
-			video;
+			guideVideo = document.querySelector('#guide-video'),
+			message = document.querySelector('#message');
 
 		btn.addEventListener('click', function() {
 			Utils.fadeOut(guide, function() {
 				Utils.fadeIn(message, function() {
+					guideVideo.pause();
 					message.style.display = 'block';
 					
 					var step = document.querySelector('.step');
